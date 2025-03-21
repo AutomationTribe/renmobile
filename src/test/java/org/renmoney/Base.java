@@ -1,11 +1,20 @@
+package org.renmoney;
+
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 import org.testng.annotations.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Duration;
+import java.util.Collections;
 
 
 public class Base  {
@@ -53,6 +62,32 @@ public class Base  {
                 "new UiScrollable(new UiSelector().scrollable(true))" +
                         ".scrollIntoView(new UiSelector().text(\"" + text + "\"))"
         ));
+    }
+
+    public static void scrollByBounds(AndroidDriver driver, int startX, int startY, int endX, int endY) {
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
+        Sequence swipe = new Sequence(finger, 1);
+        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000), PointerInput.Origin.viewport(), endX, endY));
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        driver.perform(Collections.singletonList(swipe));
+    }
+
+    public void clickCloseButton() {
+        try {
+            // Using XPath (Recommended)
+            WebElement closeButton = driver.findElement(By.xpath("//android.widget.Button[@clickable='true']"));
+            closeButton.click();
+        } catch (Exception e) {
+            System.out.println("Close button not found via XPath, trying coordinate tap...");
+
+            // Fallback: Tap on coordinates
+            int x = (572 + 668) / 2;
+            int y = (114 + 210) / 2;
+            TouchAction action = new TouchAction(driver);
+            action.tap(PointOption.point(x, y)).perform();
+        }
     }
 
 

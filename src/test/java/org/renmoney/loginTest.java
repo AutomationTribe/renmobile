@@ -1,3 +1,5 @@
+package org.renmoney;
+
 import org.renmoney.pageObjects.PasswordPage;
 import org.renmoney.pageObjects.usernamePage;
 import org.testng.annotations.Test;

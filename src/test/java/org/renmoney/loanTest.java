@@ -1,3 +1,4 @@
+package org.renmoney;
 
 import org.renmoney.pageObjects.*;
 import org.testng.annotations.Test;
@@ -16,7 +17,7 @@ public class loanTest extends Base{
 
         Thread.sleep(3000);
         username.closeGrowModal();
-       // Thread.sleep(1000);
+
         username.clickGetStarted();
 
         Thread.sleep(3000);
@@ -29,14 +30,10 @@ public class loanTest extends Base{
         password.enterPassword("Elias@2021");
         driver.hideKeyboard();
         password.clickSigninBtn();
-        Thread.sleep(10000);
+        Thread.sleep(2000);
 
-       // driver.findElement(By.className("android.widget.Button")).click();
-        dashboardPage.closeSlide();
-        //Thread.sleep(5000);
-        //dashboardPage.setLocationAccess();
-      //  Thread.sleep(1000);
-       // dashboardPage.clickCloseBtn();
+        clickCloseButton();
+
         Thread.sleep(5000);
         dashboardPage.clickGetLoan();
         dashboardPage.clickGetALoan();
@@ -44,30 +41,28 @@ public class loanTest extends Base{
         dashboardPage.checkTerms();
         dashboardPage.clickContinueBtn();
         Thread.sleep(5000);
-      //  dashboardPage.clickAllowContacts();
+
         Thread.sleep(5000);
         loan.enterLoanAmount("4000000");
         driver.hideKeyboard();
-       // driver.hideKeyboard();
-       // loan.selectLoanPurpose();
 
-       // loan.clickContinueBtn();
         Thread.sleep(2000);
-       // Personal Information
 
-        //personalInfo.setSingle();
-        //personalInfo.setEducationalLevel();
         personalInfo.getListOfStates();
         personalInfo.scrollToElement("Lagos");
         personalInfo.setStateOfResidence("Lagos");
         personalInfo.getLocalGovernmentList();
-       // personalInfo.scrollToElement("Eti-osa");
         personalInfo.setLocalGovernment("Eti-Osa");
-        scrollToText("Residential Status");
+        scrollToText("Elias");
         Thread.sleep(3000);
-        //personalInfo.setDateMovedIn();
+        personalInfo.setResidentialStatus("Owner");
+        personalInfo.setDateMovedIn("Wed, 15 December 2021");
+        personalInfo.setNextOfKinFname("Elias");
+        personalInfo.setNextOfKinLname("Ataga");
+        personalInfo.setNextOfKinRelationship("Sibling");
+        personalInfo.clickContinueBtn();
 
-        Thread.sleep(5000);
+        Thread.sleep(50000);
 
 
 

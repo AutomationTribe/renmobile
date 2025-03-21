@@ -36,27 +36,51 @@ public class PersonalInformationPage {
     @AndroidFindBy(xpath ="//android.widget.ImageView[@index='22']")
     private WebElement listOfLGA;
 
-    public void getResidentialStatus(){
-        residentialStatus.click();
+    @AndroidFindBy(xpath = "//android.view.View[@text=\"15/12/2021\"]")
+    private WebElement getCalendar;
+
+
+
+    @AndroidFindBy(xpath = "//android.widget.EditText[@index='4']")
+    private WebElement nextOfKinLname;
+
+    @AndroidFindBy(accessibility = "Continue")
+    private WebElement continueBtn;
+
+    public void clickContinueBtn(){
+        continueBtn.click();
     }
 
-    public void setSingle(){
-        single.click();
+    public void setNextOfKinRelationship(String relationship){
+
+        driver.findElement(AppiumBy.accessibilityId(relationship)).click();
     }
 
-    public  void setEducationalLevel(){
-        graduate.click();
+    public void setNextOfKinLname(String lName){
+
+        WebElement nextOfKinLname = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//android.widget.EditText[@text=\"" + lName + "\"]")));
+        nextOfKinLname.clear();
+        nextOfKinLname.sendKeys(lName);
+
     }
 
-    public WebElement setDateMovedIn(){
-        return driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"15/12/2021\")"));
-    }
-    /*public void getStateofResidence(String state){
+    public void setNextOfKinFname(String fName){
 
-        listOfStates.click();
-        WebElement stateOption = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\""+" state "+"\")"));
-        stateOption.click();
-    }*/
+       WebElement nextOfKinFname = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//android.widget.EditText[@text=\"" + fName + "\"]")));
+       nextOfKinFname.clear();
+       nextOfKinFname.sendKeys(fName);
+
+    }
+
+    public void setDateMovedIn(String date){
+
+        getCalendar.click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId(date))).click();
+    }
+
+    public void setResidentialStatus(String status){
+        driver.findElement(AppiumBy.accessibilityId(status)).click();
+    }
 
     public void getListOfStates(){
         listOfStates.click();
