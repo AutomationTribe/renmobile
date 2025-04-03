@@ -48,7 +48,8 @@ public class PersonalInformationPage {
     private WebElement continueBtn;
 
     public void clickContinueBtn(){
-        continueBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Continue"))).click();
+        //continueBtn.click();
     }
 
     public void setNextOfKinRelationship(String relationship){
@@ -91,7 +92,18 @@ public class PersonalInformationPage {
         stateOption.click();
     }
 
+    public void scrollToText(String element) {
+
+
+        WebElement stateOption = driver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().text(\"" + element + "\"))"
+        ));
+    }
+
     public void scrollToElement(String element) {
+
+
         WebElement stateOption = driver.findElement(AppiumBy.androidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true))" +
                         ".scrollIntoView(new UiSelector().description(\"" + element + "\"))"

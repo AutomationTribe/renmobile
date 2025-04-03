@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class loginTest extends Base{
     
     @Test
-    public void login() throws InterruptedException {
+    public void ValidLogin() throws InterruptedException {
 
         usernamePage username = new usernamePage(driver);
         PasswordPage password =  new PasswordPage(driver);
@@ -29,8 +29,6 @@ public class loginTest extends Base{
         driver.hideKeyboard();
         password.clickSigninBtn();
         Thread.sleep(5000);
-
-
 
     }
 }
